@@ -1,0 +1,28 @@
+<table class="table" *ngIf="userService.users?.length">
+    <thead class="table-light">
+      <th>Sr No.</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone number</th>
+      <th>Address</th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of userService.users;let i=index">
+            <td>{{i+1}}</td>
+            <td>{{user?.name}}</td>
+            <td>{{user?.email}}</td>
+            <td>{{user?.phone}}</td>
+            <td>{{user?.address}}</td>
+            <td>
+                <button class="btn btn-primary" (click)="onEdit(user)"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-danger ms-5" (click)="onDelete(user.id)" data-bs-toogle="modal" data-bs-target="#deleteModal"><i class="bi bi-trash3-fill"></i></button>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center" *ngIf="userService?.users?.length">
+    <button class="btn btn-primary" (click)="onGeneratePDF()" *ngIf="!isDownload">Generate pdf</button>
+    <button class="btn btn-primary" (click)="downloadPdf()" *ngIf="isDownload">Download pdf</button>
+  </div>
